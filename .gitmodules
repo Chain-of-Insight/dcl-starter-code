@@ -1,0 +1,6 @@
+[submodule "Hummingbirds"]
+	path = Hummingbirds
+	url = git@github.com:decentraland-scenes/Hummingbirds.git
+[submodule "Shark-animation"]
+	path = Shark-animation
+	url = git@github.com:decentraland-scenes/Shark-animation.git
