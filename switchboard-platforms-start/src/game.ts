@@ -1,6 +1,11 @@
 import utils from "../node_modules/decentraland-ecs-utils/index"
 import { Switchboard } from "./switchboard"
 import { TriggerBoxShape } from "../node_modules/decentraland-ecs-utils/triggers/triggerSystem"
+import * as ui from '../node_modules/@dcl/ui-utils/index'
+
+// UI Counter
+let coinCounter = new ui.UICounter(0, 0, 80, Color4.Yellow());
+let coinIcon = new ui.MediumIcon('models/coins.png', -75, 80)
 
 // Ground
 const base = new Entity()
@@ -66,6 +71,7 @@ coin.addComponent(
     () => {
       // Remove coin display
       engine.removeEntity(coin)
+      coinCounter.increase()
     }
     
   )
