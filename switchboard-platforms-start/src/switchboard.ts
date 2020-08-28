@@ -13,6 +13,16 @@ switchSound.addComponent(new Transform())
 switchSound.getComponent(Transform).position = Camera.instance.position
 engine.addEntity(switchSound)
 
+const platformLockingSound = new Entity()
+platformLockingSound.addComponent(
+  new AudioSource(
+    new AudioClip('sounds/platform.mp3')
+  )
+)
+platformLockingSound.addComponent(new Transform())
+platformLockingSound.getComponent(Transform).position = Camera.instance.position
+engine.addEntity(platformLockingSound)
+
 export class Switchboard extends Entity {
   constructor(
     model: GLTFShape,
@@ -25,7 +35,7 @@ export class Switchboard extends Entity {
     super()
     engine.addEntity(this)
     
-    // Swithcboard
+    // Switchboard
     this.addComponent(model)
     this.addComponent(new Transform({ position: startPosition }))
     
@@ -74,12 +84,12 @@ export class Switchboard extends Entity {
     destination: Vector3,
     buttonReset: number = 0
   ) {
+    // Play button sound
+    switchSound.getComponent(AudioSource).playOnce()
+
     // Toggle highlighted button
     this.btn1.getComponent(Transform).position.y = btn1Position
     this.btn2.getComponent(Transform).position.y = btn2Position
-
-    // Play button sound
-    switchSound.getComponent(AudioSource).playOnce()
 
     // Begin rotating gears
     this.gears.addComponentOrReplace(
@@ -104,7 +114,7 @@ export class Switchboard extends Entity {
           this.gears.getComponent(utils.KeepRotatingComponent).stop()
           this.btn1.getComponent(Transform).position.y = buttonReset
           this.btn2.getComponent(Transform).position.y = buttonReset
-          switchSound.getComponent(AudioSource).playOnce()
+          platformLockingSound.getComponent(AudioSource).playOnce()
         }
       )
     )
