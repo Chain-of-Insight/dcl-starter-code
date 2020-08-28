@@ -2,8 +2,6 @@ import utils from "../node_modules/decentraland-ecs-utils/index"
 import { Switchboard } from "./switchboard"
 import { TriggerBoxShape } from "../node_modules/decentraland-ecs-utils/triggers/triggerSystem"
 
-// Entities
-
 // Ground
 const base = new Entity()
 base.addComponent(new GLTFShape('models/baseLight.glb'))
@@ -61,12 +59,8 @@ coin.addComponent(
     null, null, null, null,
     // On camera enter:
     () => {
-      // log('coin pick up')
+      // Coin pick up sound
       coinPickUpSound.getComponent(AudioSource).playOnce()
-      // Remove coin display
-      coin.getComponent(Transform).position.y = -100
-      // XXX: For some reason removing the entity crashes the browser tab :(
-      // engine.removeEntity(coin)
     },
     // On camera exit
     () => {
